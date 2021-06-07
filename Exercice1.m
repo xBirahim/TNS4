@@ -1,12 +1,12 @@
 clear all 
 close all 
-
+%  Analyse du signal initial
 db = 70;
 
 [x,nue] = audioread('signal5.wav');
 soundsc(x,nue);
 sgram(x,nue,db,1);
-
+%Synthèse d’un filtre avec une fenêtre rectangulaire
 M = randi([40,50]);
 fc = 2000;
 wn = 2*fc/nue;
@@ -45,6 +45,7 @@ ylabel('db');
 %La fréquence de coupure est bien à 2000hz aprés avoir verifié les tracé du
 %gain complex
 
+%Synthèse d’un filtre avec une autre fenêtre
 w2 = blackman(M+1);
 
 
@@ -77,9 +78,14 @@ title('Gain Complexe en module');
 xlabel('Fréquence(hz)');
 ylabel('db');
 
-% figure(5);
-% signal_filtre_fenetre_black=filter(B1,1,X);
-% sgram(signal_filtre_fenetre_black,nue,60,5);        
-% soundsc(signal_filtre_fenetre_black,nue);
+%Filtrage
+figure(4);
+signal_filtre_fenetre_black=filter(B,1,x);
+soundsc(signal_filtre_fenetre_black,nue);
+sgram(signal_filtre_fenetre_black,nue,60,4);        
+
+
+
+
 
 
