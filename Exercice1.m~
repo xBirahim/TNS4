@@ -1,0 +1,42 @@
+clear all 
+close all 
+
+db = 70;
+
+[x,nue] = audioread('signal5.wav');
+soundsc(x,nue);
+sgram(x,nue,db,1);
+
+M = randi([40,50]);
+fc = 2000;
+wn = 2*fc/nue;
+w = rectwin(M+1);
+
+B = fir1(M,wn,w);
+
+N = 0:M;
+figure (2);
+subplot(221)
+stem(N,B);
+title('Réponse Impulsionnelle');
+xlabel('indice');
+ylabel('amplitude');
+
+subplot(222)
+zplane(N,B);
+title('Diagramme de pôle-zéros');
+xlabel('réel');
+ylabel('imaginaire');
+
+subplot(223)
+fa = 2600;
+[y,F] = freqz(B,1,fa,nue);
+plot(F,20*log10(abs(y)));
+title('Gain Complexe en module');
+xlabel('Fréquence(hz)');
+ylabel('db');
+plot(F,20*log10(abs(y)));
+title('Gain Complexe en module');
+xlabel('Fréquence(hz)');
+ylabel('db');
+

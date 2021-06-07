@@ -1,0 +1,8 @@
+clear all
+close all 
+
+M = randi([40,50]);
+fc = 2000;
+wn = 
+w = rectwin(M+1);
+B = fir1(M,w);
